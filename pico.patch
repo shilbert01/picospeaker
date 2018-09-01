@@ -1,0 +1,19 @@
+--- picospeaker.bak     2018-08-27 22:03:05.000000000 +0200
++++ picospeaker 2018-08-27 23:49:35.289440981 +0200
+@@ -59,8 +59,16 @@
+       exit(0)
+     elif ( argv[opt] == '-l' ) or ( argv[opt] == '--language' ):
+       languages = ('en-US', 'en-GB', 'de-DE', 'es-ES', 'fr-FR', 'it-IT')
++      lang_map = {
++       'en': 'en-US',
++       'de': 'de-DE',
++       'es': 'es-ES',
++       'fr': 'fr-FR',
++       'it': 'it-IT'}
+       if ( argv[opt+1] in languages ):
+         settings['language'] = argv[opt+1]
++      elif ( argv[opt+1] in lang_map.keys() ):
++       settings['language'] = lang_map[argv[opt+1]]
+       else:
+         stderr.write('Language ' + argv[opt+1] + ' is currently not available.\n')
+         stderr.write('Available languages are ' + ', '.join(languages[:-1]) + ' and ' + languages[-1] + '.\n')

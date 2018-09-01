@@ -14,8 +14,8 @@ from time import sleep
 
 # help and version tuples
 version = (
-  'PicoSpeaker 0.6.2',
-  'Written by Kyle',
+  'PicoSpeaker 0.6.2-1',
+  'Written by Kyle,forked by shilbert01',
   'This program is free and unencumbered software released into the public domain.',
   'See the included UNLICENSE file for details.')
 help = (
@@ -59,8 +59,16 @@ def parse ():
       exit(0)
     elif ( argv[opt] == '-l' ) or ( argv[opt] == '--language' ):
       languages = ('en-US', 'en-GB', 'de-DE', 'es-ES', 'fr-FR', 'it-IT')
+      lang_map = {
+       'en': 'en-US',
+       'de': 'de-DE',
+       'es': 'es-ES',
+       'fr': 'fr-FR',
+       'it': 'it-IT'}
       if ( argv[opt+1] in languages ):
         settings['language'] = argv[opt+1]
+      elif ( argv[opt+1] in lang_map.keys() ):
+       settings['language'] = lang_map[argv[opt+1]]
       else:
         stderr.write('Language ' + argv[opt+1] + ' is currently not available.\n')
         stderr.write('Available languages are ' + ', '.join(languages[:-1]) + ' and ' + languages[-1] + '.\n')
